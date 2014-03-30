@@ -1,3 +1,5 @@
+// Improved square root function that works for very large
+// and very small numbers.
 package main
 
 import (

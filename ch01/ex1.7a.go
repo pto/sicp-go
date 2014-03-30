@@ -1,3 +1,5 @@
+// Show that the original square root function fails on
+// very large and very small numbers.
 package main
 
 import (

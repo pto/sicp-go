@@ -1,3 +1,4 @@
+// Square root function that hides its procedures from the outer scope.
 package main
 
 import (
