@@ -1,14 +1,36 @@
 // Count number of ways to make change for a dollar
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+	"strconv"
+)
 
 type cents int
 type coinCount int
 type changeCount int
 
+var calls_to_cc int
+
 func main() {
-	fmt.Println(countChange(100))
+	if len(os.Args) != 2 {
+		usage()
+	}
+	var (
+		amount int
+		err    error
+	)
+	if amount, err = strconv.Atoi(os.Args[1]); err != nil {
+		usage()
+	}
+	fmt.Printf("%v in %v calls\n", countChange(cents(amount)), calls_to_cc)
+}
+
+func usage() {
+	fmt.Printf("usage: %s coint-count\n", filepath.Base(os.Args[0]))
+	os.Exit(1)
 }
 
 func countChange(amount cents) changeCount {
@@ -16,6 +38,7 @@ func countChange(amount cents) changeCount {
 }
 
 func cc(amount cents, coins coinCount) changeCount {
+	calls_to_cc++
 	switch {
 	case amount == 0:
 		return 1
@@ -27,17 +50,6 @@ func cc(amount cents, coins coinCount) changeCount {
 }
 
 func firstCoinSize(coins coinCount) cents {
-	switch coins {
-	case 1:
-		return 1
-	case 2:
-		return 5
-	case 3:
-		return 10
-	case 4:
-		return 25
-	case 5:
-		return 50
-	}
-	panic("wrong number of coins")
+	m := map[coinCount]cents{1: 1, 2: 5, 3: 10, 4: 25, 5: 50}
+	return m[coins]
 }
