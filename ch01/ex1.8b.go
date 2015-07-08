@@ -14,7 +14,7 @@ func main() {
 
 func printResult(x float64) {
 	root := cubeRoot(x)
-	fmt.Printf("%25.15g %25.15g\n", root, root*root*root)
+	fmt.Printf("%25.15e %25.15e\n", root, root*root*root)
 }
 
 func cubeRoot(x float64) float64 {
