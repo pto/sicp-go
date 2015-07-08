@@ -1,12 +1,10 @@
 package ex07_test
 
 import (
+	"github.com/pto/sicp-go/ch01/ex07"
 	"math"
-	"sicp/ch01/ex07"
 	"testing"
 )
-
-var test_function = ex07.SqrtImproved
 
 func Test_Original(t *testing.T) {
 	f := ex07.Sqrt
