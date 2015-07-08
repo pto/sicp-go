@@ -1,7 +1,7 @@
 package ex03_test
 
 import (
-	"sicp/ch01/ex03"
+	"github.com/pto/sicp-go/ch01/ex03"
 	"testing"
 )
 
@@ -22,6 +22,7 @@ func Test_SumOfSquaresLargestTwo(t *testing.T) {
 		{1, 2, 1, 5},
 		{1, 1, 1, 2},
 		{0, 0, 0, 0},
+		{-1, -1, -1, 2},
 		{-1, -2, -3, 5},
 		{-1, -3, -2, 5},
 		{-2, -1, -3, 5},
