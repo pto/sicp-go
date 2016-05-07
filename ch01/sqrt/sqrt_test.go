@@ -19,13 +19,9 @@ func Test_Sqrt(t *testing.T) {
 }
 
 func test_sqrt(x float64, t *testing.T) {
-	if math.IsNaN(math.Sqrt(x)) {
-		if !math.IsNaN(Sqrt(x)) {
-			t.Errorf("math.Sqrt(%v) is NaN, but Sqrt(%v) is not\n", x, x)
-		}
-	} else if math.Abs(Sqrt(x)-math.Sqrt(x)) > math.Sqrt(x)/1e-15 {
-		t.Errorf("math.Sqrt(%v) is %v, but Sqrt(%v) is %v\n",
-			x, math.Sqrt(x), x, Sqrt(x))
+	if (math.IsNaN(math.Sqrt(x)) && !math.IsNaN(Sqrt(x))) ||
+		math.Abs(Sqrt(x)-math.Sqrt(x)) > math.Sqrt(x)/1e-15 {
+		t.Errorf("Sqrt(%v) is %v, not %v\n", x, Sqrt(x), math.Sqrt(x))
 	}
 }
 

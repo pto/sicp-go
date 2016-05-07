@@ -1,9 +1,6 @@
-package ex03_test
+package ex03
 
-import (
-	"github.com/pto/sicp-go/ch01/ex03"
-	"testing"
-)
+import "testing"
 
 func Test_SumOfSquaresLargestTwo(t *testing.T) {
 	type testDataType struct {
@@ -39,9 +36,10 @@ func Test_SumOfSquaresLargestTwo(t *testing.T) {
 		{0, 0, 0.5, 0.25},
 		{0, 0.5, 0.5, 0.5}}
 	for _, data := range testData {
-		if ex03.SumOfSquaresLargestTwo(data.a, data.b, data.c) != data.result {
-			t.Errorf("SumOfSquaresLargestTwo(%v, %v, %v) != %v\n",
-				data.a, data.b, data.c, data.result)
+		result := SumOfSquaresLargestTwo(data.a, data.b, data.c)
+		if result != data.result {
+			t.Errorf("SumOfSquaresLargestTwo(%v, %v, %v) is %v, not %v\n",
+				data.a, data.b, data.c, result, data.result)
 		}
 	}
 }
