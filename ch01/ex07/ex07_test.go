@@ -1,28 +1,42 @@
-package ex07_test
+package ex07
 
 import (
-	"github.com/pto/sicp-go/ch01/ex07"
 	"math"
 	"testing"
 )
 
-func Test_Original(t *testing.T) {
-	f := ex07.Sqrt
-	test_sqrt(f, 2, t)
-	// test_sqrt(f, 2e-50, t) // FAILS
-	// test_sqrt(f, 2e50, t)  // Stack overflow
+func Test_Sqrt(t *testing.T) {
+	test_sqrt(2, t)
+	test_sqrt(1e5, t)
+	test_sqrt(1e-5, t)
+	test_sqrt(1e50, t)
+	test_sqrt(1e-50, t)
+	test_sqrt(0, t)
+	test_sqrt(1/math.Inf(-1), t) // negative zero
+	test_sqrt(-1, t)
+	test_sqrt(-1e50, t)
+	test_sqrt(-1e-50, t)
+	test_sqrt(math.NaN(), t)
+	test_sqrt(math.Inf(1), t)
+	test_sqrt(math.Inf(-1), t)
 }
 
-func Test_Improved(t *testing.T) {
-	f := ex07.SqrtImproved
-	test_sqrt(f, 2, t)
-	test_sqrt(f, 2e-50, t)
-	test_sqrt(f, 2e50, t)
+func test_sqrt(x float64, t *testing.T) {
+	if (math.IsNaN(math.Sqrt(x)) && !math.IsNaN(Sqrt(x))) ||
+		(math.IsNaN(Sqrt(x)) && !math.IsNaN(math.Sqrt(x))) ||
+		math.Abs(Sqrt(x)-math.Sqrt(x)) > math.Sqrt(x)/1e-15 {
+		t.Errorf("Sqrt(%v) is %v, not %v\n", x, Sqrt(x), math.Sqrt(x))
+	}
 }
 
-func test_sqrt(f func(float64) float64, x float64, t *testing.T) {
-	sqrt := f(x)
-	if math.Abs(sqrt*sqrt-x) > x/1e-15 {
-		t.Errorf("%v(%v) squared is %v\n", f, x, sqrt*sqrt)
+func Benchmark_Sqrt(b *testing.B) {
+	for i := 1; i < b.N; i++ {
+		Sqrt(123456789.0)
+	}
+}
+
+func Benchmark_MathSqrt(b *testing.B) {
+	for i := 1; i < b.N; i++ {
+		math.Sqrt(123456789.0)
 	}
 }

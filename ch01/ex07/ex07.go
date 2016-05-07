@@ -1,47 +1,30 @@
-// Package ex07 implements square roots by Newton's method
+// Package ex07 calculates square roots by Newton's method.
 package ex07
 
-import (
-	"math"
-)
+import "math"
 
-// Original square root function from text.
 func Sqrt(x float64) float64 {
-	return sqrtIter(1, x)
-}
-
-func sqrtIter(guess, x float64) float64 {
-	if isGoodEnough(guess, x) {
-		return guess
+	switch {
+	case x < 0 || math.IsNaN(x):
+		return math.NaN()
+	case x == 0:
+		return 0
+	case math.IsInf(x, 1):
+		return math.Inf(1)
+	case math.IsInf(x, -1):
+		return math.Inf(-1)
 	}
-	return sqrtIter(improvedGuess(guess, x), x)
-}
-
-func isGoodEnough(guess, x float64) bool {
-	return math.Abs(guess*guess-x) < 1e-15
-}
-
-func improvedGuess(guess, x float64) float64 {
-	return average(guess, x/guess)
-}
-
-func average(a, b float64) float64 {
-	return (a + b) / 2
-}
-
-// Improved square root function that works for very large
-// and very small numbers.
-func SqrtImproved(x float64) float64 {
-	return sqrtIterImproved(1, 0, x)
-}
-
-func sqrtIterImproved(guess, prevGuess, x float64) float64 {
-	if isGoodEnoughImproved(guess, prevGuess) {
-		return guess
+	guess, previousGuess := 1.0, 0.0
+	for !isGoodEnough(guess, previousGuess) {
+		guess, previousGuess = improve(guess, x), guess
 	}
-	return sqrtIterImproved(improvedGuess(guess, x), guess, x)
+	return guess
 }
 
-func isGoodEnoughImproved(guess, prevGuess float64) bool {
-	return math.Abs(guess-prevGuess)/guess < 1e-15
+func isGoodEnough(guess float64, previousGuess float64) bool {
+	return math.Abs(guess-previousGuess) < guess/1e15
+}
+
+func improve(guess float64, x float64) float64 {
+	return (guess + x/guess) / 2
 }
