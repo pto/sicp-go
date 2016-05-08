@@ -11,8 +11,6 @@ func Sqrt(x float64) float64 {
 		return 0
 	case math.IsInf(x, 1):
 		return math.Inf(1)
-	case math.IsInf(x, -1):
-		return math.Inf(-1)
 	}
 	guess, previousGuess := 1.0, 0.0
 	for !isGoodEnough(guess, previousGuess) {
