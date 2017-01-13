@@ -9,18 +9,18 @@ import (
 	"strings"
 )
 
-var coinValues = []int{1, 5, 10, 25, 50}
+var coinValues = [...]int{1, 5, 10, 25, 50}
 var functionCalls = 0
 
 func main() {
 	programName := filepath.Base(os.Args[0])
 	if len(os.Args) != 2 || strings.HasPrefix(os.Args[1], "-h") {
-		fmt.Printf("usage: %s number-of-cents\n", programName)
+		fmt.Printf("usage: %s number-of-pennies\n", programName)
 		os.Exit(1)
 	}
 	amount, err := strconv.Atoi(os.Args[1])
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "%s:", programName, err)
+		fmt.Fprintf(os.Stderr, "%s: %s\n", programName, err)
 		os.Exit(1)
 	}
 	ways := countChange(amount)
