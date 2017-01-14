@@ -6,19 +6,21 @@ import (
 	"math"
 )
 
+type floatFunc func(float64) float64
+
 func closeEnough(v1, v2 float64) bool {
 	const tolerance = 0.00001
 	return math.Abs(v1-v2) < tolerance
 }
 
-func fixedpoint(f func(float64) float64, guess float64) float64 {
+func fixedpoint(f floatFunc, guess float64) float64 {
 	for !closeEnough(guess, f(guess)) {
 		guess = f(guess)
 	}
 	return guess
 }
 
-func averageDamp(f func(float64) float64) func(float64) float64 {
+func averageDamp(f floatFunc) floatFunc {
 	return func(x float64) float64 {
 		return (x + f(x)) / 2
 	}
