@@ -1,5 +1,5 @@
-// Package ex07 calculates square roots by Newton's method.
-package ex07
+// Package sqrt calculates square roots by Newton's method.
+package sqrt
 
 import "math"
 

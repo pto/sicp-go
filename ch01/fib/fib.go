@@ -1,4 +1,4 @@
-// Fib calculates Fibonacci numbers.
+// Fib calculates Fibonacci numbers for the command line arguments.
 package main
 
 import (
@@ -13,7 +13,7 @@ import (
 func main() {
 	programName := filepath.Base(os.Args[0])
 	if len(os.Args) < 2 || strings.HasPrefix(os.Args[1], "-h") {
-		fmt.Printf("usage: %s <number>\n", programName)
+		fmt.Printf("usage: %s <number>...\n", programName)
 		os.Exit(1)
 	}
 	for _, arg := range os.Args[1:] {

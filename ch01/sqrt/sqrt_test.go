@@ -1,4 +1,4 @@
-package ex07
+package sqrt
 
 import (
 	"math"
