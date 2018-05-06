@@ -1,4 +1,4 @@
-// Package fact contains BigInt implementations of the factorial function.
+// Package fact contains big.Int implementations of the factorial function.
 package fact
 
 import (
