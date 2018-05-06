@@ -5,27 +5,17 @@ import (
 	"testing"
 )
 
-func Test_Sqrt(t *testing.T) {
-	test_sqrt(2, t)
-	test_sqrt(1e5, t)
-	test_sqrt(1e-5, t)
-	test_sqrt(1e50, t)
-	test_sqrt(1e-50, t)
-	test_sqrt(0, t)
-	test_sqrt(1/math.Inf(-1), t) // negative zero
-	test_sqrt(-1, t)
-	test_sqrt(-1e50, t)
-	test_sqrt(-1e-50, t)
-	test_sqrt(math.NaN(), t)
-	test_sqrt(math.Inf(1), t)
-	test_sqrt(math.Inf(-1), t)
-}
+func TestSqrt(t *testing.T) {
+	cases := []float64{2, 1e5, 1e-5, 1e50, 1e-50, 0, 1 / math.Inf(-1),
+		1 / math.Inf(1), -1, -1e50, -1e-50, math.NaN(), math.Inf(1),
+		math.Inf(-1)}
 
-func test_sqrt(x float64, t *testing.T) {
-	if (math.IsNaN(math.Sqrt(x)) && !math.IsNaN(Sqrt(x))) ||
-		(math.IsNaN(Sqrt(x)) && !math.IsNaN(math.Sqrt(x))) ||
-		math.Abs(Sqrt(x)-math.Sqrt(x)) > math.Sqrt(x)/1e-15 {
-		t.Errorf("Sqrt(%v) is %v, not %v\n", x, Sqrt(x), math.Sqrt(x))
+	for _, c := range cases {
+		if (math.IsNaN(math.Sqrt(c)) && !math.IsNaN(Sqrt(c))) ||
+			(math.IsNaN(Sqrt(c)) && !math.IsNaN(math.Sqrt(c))) ||
+			math.Abs(Sqrt(c)-math.Sqrt(c)) > math.Sqrt(c)/1e-15 {
+			t.Errorf("Sqrt(%v) is %v, want %v\n", c, Sqrt(c), math.Sqrt(c))
+		}
 	}
 }
 

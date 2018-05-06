@@ -3,6 +3,7 @@ package sqrt
 
 import "math"
 
+// Sqrt returns the square root of x.
 func Sqrt(x float64) float64 {
 	switch {
 	case x < 0 || math.IsNaN(x):
