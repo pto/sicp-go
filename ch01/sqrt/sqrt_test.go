@@ -1,6 +1,7 @@
 package sqrt
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
@@ -29,4 +30,12 @@ func Benchmark_MathSqrt(b *testing.B) {
 	for i := 1; i < b.N; i++ {
 		math.Sqrt(123456789.0)
 	}
+}
+
+func ExampleSqrt() {
+	iterations = 0
+	result := Sqrt(2)
+	fmt.Println(result, result*result, iterations)
+	// Output:
+	// 1.414213562373095 1.9999999999999996 6
 }
