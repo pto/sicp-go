@@ -12,8 +12,7 @@ func Recursive(x *big.Int) *big.Int {
 	if x.Cmp(one) == 0 {
 		return one
 	}
-	tmp := new(big.Int)
-	return tmp.Mul(x, Recursive(tmp.Sub(x, one)))
+	return new(big.Int).Mul(x, Recursive(new(big.Int).Sub(x, one)))
 }
 
 // Iterative calculates the factorial of x iteratively.
