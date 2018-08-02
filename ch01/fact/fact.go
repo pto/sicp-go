@@ -7,17 +7,17 @@ import (
 
 var one = big.NewInt(1)
 
-// FactRecursive calculates the factorial of x recursively.
-func FactRecursive(x *big.Int) *big.Int {
+// Recursive calculates the factorial of x recursively.
+func Recursive(x *big.Int) *big.Int {
 	if x.Cmp(one) == 0 {
 		return one
 	}
 	tmp := new(big.Int)
-	return tmp.Mul(x, FactRecursive(tmp.Sub(x, one)))
+	return tmp.Mul(x, Recursive(tmp.Sub(x, one)))
 }
 
-// FactIterative calculates the factorial of x iteratively.
-func FactIterative(x *big.Int) *big.Int {
+// Iterative calculates the factorial of x iteratively.
+func Iterative(x *big.Int) *big.Int {
 	result := new(big.Int).Set(x)
 	counter := new(big.Int).Sub(x, one)
 	for counter.Cmp(one) > 0 {

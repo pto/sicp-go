@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestFactRecursive(t *testing.T) {
+func TestRecursive(t *testing.T) {
 	cases := []struct {
 		input    int64
 		expected string
@@ -22,27 +22,27 @@ func TestFactRecursive(t *testing.T) {
 
 	for _, c := range cases {
 		input := big.NewInt(c.input)
-		result := FactRecursive(input)
+		result := Recursive(input)
 		if result.String() != c.expected {
-			t.Errorf("FactRecursive(%d) is %s, want %s",
+			t.Errorf("fact.Recursive(%d) is %s, want %s",
 				input, result, c.expected)
 		}
-		result = FactIterative(input)
+		result = Iterative(input)
 		if result.String() != c.expected {
-			t.Errorf("FactIterative(%d) is %s, want %s",
+			t.Errorf("fact.Iterative(%d) is %s, want %s",
 				input, result, c.expected)
 		}
 	}
 }
 
-func BenchmarkFactRecursive(b *testing.B) {
+func BenchmarkRecursive(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		FactRecursive(big.NewInt(200))
+		Recursive(big.NewInt(200))
 	}
 }
 
-func BenchmarkFactIterative(b *testing.B) {
+func BenchmarkIterative(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		FactIterative(big.NewInt(200))
+		Iterative(big.NewInt(200))
 	}
 }
