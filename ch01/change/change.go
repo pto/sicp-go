@@ -15,7 +15,7 @@ var functionCalls = 0
 func main() {
 	programName := filepath.Base(os.Args[0])
 	if len(os.Args) != 2 || strings.HasPrefix(os.Args[1], "-h") {
-		fmt.Printf("usage: %s number-of-pennies\n", programName)
+		fmt.Fprintf(os.Stderr, "usage: %s number-of-pennies\n", programName)
 		os.Exit(1)
 	}
 	amount, err := strconv.Atoi(os.Args[1])
