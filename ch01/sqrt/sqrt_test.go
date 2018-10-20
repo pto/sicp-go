@@ -9,7 +9,7 @@ import (
 func TestSqrt(t *testing.T) {
 	cases := []float64{2, 1e5, 1e-5, 1e50, 1e-50, 0, 1 / math.Inf(-1),
 		1 / math.Inf(1), -1, -1e50, -1e-50, math.NaN(), math.Inf(1),
-		math.Inf(-1)}
+		math.Inf(-1), math.SmallestNonzeroFloat64, math.MaxFloat64}
 
 	for _, c := range cases {
 		if (math.IsNaN(math.Sqrt(c)) && !math.IsNaN(Sqrt(c))) ||
