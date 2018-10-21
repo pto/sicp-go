@@ -18,11 +18,10 @@ func Recursive(x *big.Int) *big.Int {
 
 // Iterative calculates the factorial of x iteratively.
 func Iterative(x *big.Int) *big.Int {
-	result := new(big.Int).Set(x)
 	counter := new(big.Int).Sub(x, one)
 	for counter.Cmp(one) > 0 {
-		result.Mul(result, counter)
+		x.Mul(x, counter)
 		counter.Sub(counter, one)
 	}
-	return result
+	return x
 }
