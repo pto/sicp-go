@@ -10,9 +10,10 @@ var one = big.NewInt(1)
 // Recursive calculates the factorial of x recursively.
 func Recursive(x *big.Int) *big.Int {
 	if x.Cmp(one) == 0 {
-		return one
+		return big.NewInt(1)
 	}
-	return new(big.Int).Mul(x, Recursive(new(big.Int).Sub(x, one)))
+	r := Recursive(new(big.Int).Sub(x, one))
+	return r.Mul(r, x)
 }
 
 // Iterative calculates the factorial of x iteratively.
