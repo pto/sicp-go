@@ -26,6 +26,7 @@ func main() {
 	}
 }
 
+// fib calculates the nth Fibonacci number.
 func fib(n int) *big.Int {
 	a := big.NewInt(0)
 	b := big.NewInt(1)
